@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0098)https://trysakai.longsight.com/portal/tool/04fa3312-5076-4e36-9928-ad44597df64d/synMainLite?time=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_US" xml:lang="en_US" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./portal.css" type="text/css" rel="stylesheet" media="screen, tty, tv, handheld, projection">
+<link href="./tool_base.css" type="text/css" rel="stylesheet" media="screen, tty, tv, handheld, projection">
+<link href="./tool.css" type="text/css" rel="stylesheet" media="screen, tty, tv, handheld, projection">
+<link href="./print.css" type="text/css" rel="stylesheet" media="print">
+<script type="text/javascript" src="./headscripts.js.download"></script>
+<script type="text/javascript">var sakai = sakai || {}; sakai.editor = sakai.editor || {}; sakai.editor.editors = sakai.editor.editors || {}; sakai.editor.editors.ckeditor = sakai.editor.editors.ckeditor || {}; sakai.locale = sakai.locale || {};
+sakai.locale.userCountry = 'US';
+sakai.locale.userLanguage = 'en';
+sakai.locale.userLocale = 'en_US';
+sakai.editor.collectionId = '/user/d47393d5-edff-4ecf-9c4e-8159c596b1b2/';
+sakai.editor.enableResourceSearch = false;
+sakai.editor.siteToolSkin = '/library/skin/trysakai/tool.css';
+sakai.editor.sitePrintSkin = '/library/skin/trysakai/print.css';
+sakai.editor.editors.ckeditor.browser = 'elfinder';
+</script>
+<script type="text/javascript">var CKEDITOR_BASEPATH='/library/webjars/ckeditor/4.5.7/full/';
+</script>
+<script type="text/javascript" src="./ckeditor.js.download"></script><style>.cke{visibility:hidden;}</style>
+<script type="text/javascript" src="./ckeditor.launch.js.download"></script>
+</head>
+<body onload="setMainFrameHeight(&#39;Main04fa3312x5076x4e36x9928xad44597df64d&#39;);setFocus(focus_path);" marginwidth="0" marginheight="0">
+<div class="portletBody">
+
+<script type="text/javascript">includeLatestJQuery("msgcntr");</script><script type="text/javascript" src="./jquery.min.js(1).download"></script><script type="text/javascript" src="./jquery-migrate.min.js(1).download"></script><script type="text/javascript" src="./bootstrap.min.js(1).download"></script><script type="text/javascript" src="./jquery-ui.min.js(1).download"></script><link rel="stylesheet" href="./jquery-ui.min(1).css">
+<script type="text/javascript" src="./jquery.tablesorter-2.0.3.min.js.download"></script>
+<script type="text/javascript">
+
+//this function (setupTableParsers) setting has to be in the jsp page b/c of the msgs.syn_no_messages string.
+var SynMainLite = SynMainLite || {};
+var messagesDisabled = false;
+var forumsDisabled = false;
+
+SynMainLite.setupTableHeaders = function (){
+	try{
+	//since f:facet only allows one tag (no nested tags either) this will set up the hyperlink (only used to
+	//make the user realize they can click the headers for sorting) to have the correct text from the msgs variable
+	$("#hideHeader")[0].innerHTML = "Don't Show";
+	$("#siteHeader")[0].innerHTML = 'Site';
+	if(!messagesDisabled){
+		$("#messagesHeader")[0].innerHTML = 'New Messages';
+	}
+	if(!forumsDisabled){
+		$("#forumsHeader")[0].innerHTML = 'New in Forums';
+	}
+	$("#showOptions")[0].innerHTML = 'Options';
+	}catch(e){
+	}
+};
+
+
+SynMainLite.setupTableParsers = function (){
+
+	 //add message count orderer
+	 $.tablesorter.addParser({
+	        id: 'newMessageCount',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            //this is used to parse out the number of messages from the html, or 
+	            //convert 'none' to the number 0, so we can order numberically
+	            return s.toLowerCase().replace('none',0).replace(new RegExp('</a>$'), '').replace(new RegExp('<a.*>'),'').replace(new RegExp('<img.*>'),'');           
+	        },
+	        type: "numeric"
+	    });  
+	 //add title sorter
+	    $.tablesorter.addParser({
+	        id: 'title',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            //this is used to parse out the number of messages from the html, or 
+	            //convert 'none' to the number 0, so we can order numberically
+	            return s.toLowerCase().replace(new RegExp('</a>$'), '').replace(new RegExp('<a.*>'),'');           
+	        },
+	        type: "text"
+	    });
+	    
+	    //add checkbox sorter
+	    $.tablesorter.addParser({
+	        id: 'checkbox',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            var integer = 0;
+	            if (s.toLowerCase().match(/<input[^>]*checked*/i)) {
+	                integer = 1;
+	            }
+	            return integer;
+	        },
+	        type: "numeric"
+	    }); 
+	    
+	    //apply orderers to workspaceTable
+	    
+	    if(!messagesDisabled && !forumsDisabled){
+		    $(".workspaceTable").tablesorter({ 
+			    
+		        headers: {
+		    	0: { 
+		    	    sorter:'checkbox' 
+		    	},
+		    	1: { 
+		 	       sorter:'title' 
+		    	}, 
+		    	2: { 
+			        sorter:'newMessageCount' 
+			    }, 
+		        3: { 
+		            sorter:'newMessageCount' 
+		        } 
+		        } 
+		    });
+	    }else if(messagesDisabled && forumsDisabled){
+	    	 $(".workspaceTable").tablesorter({ 
+				    
+			        headers: {
+			    	0: { 
+			    	    sorter:'checkbox' 
+			    	},
+			    	1: { 
+			 	       sorter:'title' 
+			    	} 
+			        } 
+			    });
+	    }else{
+	    	 $(".workspaceTable").tablesorter({ 
+				    
+			        headers: {
+			    	0: { 
+			    	    sorter:'checkbox' 
+			    	},
+			    	1: { 
+			 	       sorter:'title' 
+			    	}, 
+			    	2: { 
+				        sorter:'newMessageCount' 
+				    }
+			        } 
+			    });
+	    }
+	};
+
+
+
+
+
+
+
+	function resize(){
+		mySetMainFrameHeightViewCell('Main04fa3312x5076x4e36x9928xad44597df64d');
+	}
+	
+	
+function mySetMainFrameHeightViewCell(id)
+{
+	// run the script only if this window's name matches the id parameter
+	// this tells us that the iframe in parent by the name of 'id' is the one who spawned us
+	if (typeof window.name != "undefined" && id != window.name) return;
+
+	var frame = parent.document.getElementById(id);
+	if (frame)
+	{
+
+		var objToResize = (frame.style) ? frame.style : frame;
+  
+    // SAK-11014 revert           if ( false ) {
+
+		var height; 		
+		var offsetH = document.body.offsetHeight;
+		var innerDocScrollH = null;
+
+		if (typeof(frame.contentDocument) != 'undefined' || typeof(frame.contentWindow) != 'undefined')
+		{
+			// very special way to get the height from IE on Windows!
+			// note that the above special way of testing for undefined variables is necessary for older browsers
+			// (IE 5.5 Mac) to not choke on the undefined variables.
+ 			var innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
+			innerDocScrollH = (innerDoc != null) ? innerDoc.body.scrollHeight : null;
+		}
+	
+		if (document.all && innerDocScrollH != null)
+		{
+			// IE on Windows only
+			height = innerDocScrollH;
+		}
+		else
+		{
+			// every other browser!
+			height = offsetH;
+		}
+   // SAK-11014 revert		} 
+
+   // SAK-11014 revert             var height = getFrameHeight(frame);
+
+		// here we fudge to get a little bigger
+		var newHeight = height + 40;
+
+		// but not too big!
+		if (newHeight > 32760) newHeight = 32760;
+
+		// capture my current scroll position
+		var scroll = findScroll();
+
+		// resize parent frame (this resets the scroll as well)
+		objToResize.height=newHeight + "px";
+
+		// reset the scroll, unless it was y=0)
+		if (scroll[1] > 0)
+		{
+			var position = findPosition(frame);
+			parent.window.scrollTo(position[0]+scroll[0], position[1]+scroll[1]);
+		}
+	}
+}
+</script>
+<script src="./synopticLite.js.download" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./TableSorter.css">
+<link rel="stylesheet" type="text/css" href="./msgcntr.css">
+
+	<form id="synopticForm" method="post" action="https://trysakai.longsight.com/portal/tool/04fa3312-5076-4e36-9928-ad44597df64d/synMainLite" enctype="application/x-www-form-urlencoded">
+
+		
+		
+		
+		
+			
+			
+							
+								  	
+		 		
+	
+				
+		  	
+		  	
+		  	
+			
+		  	<div class="hideInfo" style="display: none;"> 
+				<span class="information">Remove sites from this synoptic list.</span><span class="highlight">Sites that are hidden from Preferences will not show up in this list.</span>
+		  	</div>
+			
+			
+				
+		 	
+		 	
+	 		<div class="optionsTable" style="display: none;"> 			
+	 			<br>
+	 			<br>
+	 		<input id="synopticForm:myWorkspaceUnread:update" type="submit" name="synopticForm:myWorkspaceUnread:update" value="Update" onclick="clearFormHiddenParams_synopticForm(this.form.id);">	 		
+	 		<input type="button" id="cancel" value="Cancel" onclick="$(&#39;.optionsTable&#39;).fadeOut(resize);$(&#39;.optionLink&#39;).parent().parent().toggle();SynMainLite.resetCheckboxes();$(&#39;.hideInfo&#39;).fadeOut();if(SynMainLite.getCount() == 1){$(&#39;.noActivity&#39;).fadeIn();$(&#39;.workspaceTable&#39;).fadeOut();};"> 		
+	 		</div>
+		
+			
+				<br>
+				<span class="noActivity">No recent activity has occurred in your sites.</span>  
+			
+		
+
+
+		<!-- Site Home Page -->
+		
+			
+		
+				
+					
+				
+				
+				
+					
+					
+				
+						
+					
+					
+		 			
+					
+
+					
+				
+		
+				
+					
+				
+
+				
+					
+			
+					
+			
+					
+
+					
+					
+					
+				
+			
+		
+		
+	
+	  	
+	
+
+    <input type="hidden" name="com.sun.faces.VIEW" id="com.sun.faces.VIEW" value="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"><input type="hidden" name="synopticForm" value="synopticForm">
+<script type="text/javascript">
+<!--
+function clearFormHiddenParams_synopticForm(curFormName) {
+  var curForm = document.forms[curFormName];
+}
+//-->
+</script>
+</form> 
+    
+	<script type="text/javascript">
+		//Put this code in the jsp page since IE8 was having trouble with $(document).ready() function.
+		SynMainLite.setupTableParsers();
+		SynMainLite.setupTableHeaders();
+		SynMainLite.setupTableSortImageOffset();
+		//hide all checkboxes that are used to reset original values
+		$(".unchangedValue").hide();
+		SynMainLite.toggleHiddenRows();
+	</script>
+  </div>
+  
+ 
+ 
+</body></html>

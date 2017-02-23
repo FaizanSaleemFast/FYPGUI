@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex,follow" />
+	<title>My View - MantisBT</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8012/mani30/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="http://localhost:8012/mani30/css/jquery-ui-1.11.4.min.css" />
+	<link rel="stylesheet" type="text/css" href="http://localhost:8012/mani30/css/common_config.php" />
+	<link rel="stylesheet" type="text/css" href="http://localhost:8012/mani30/css/status_config.php" />
+	<link rel="shortcut icon" href="/mani30/images/favicon.ico" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="http://localhost:8012/mani30/browser_search_plugin.php?type=text" />
+	<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="http://localhost:8012/mani30/browser_search_plugin.php?type=id" />
+	<script type="text/javascript" src="/mani30/javascript_config.php"></script>
+	<script type="text/javascript" src="/mani30/javascript_translations.php"></script>
+	<script type="text/javascript" src="/mani30/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/mani30/js/jquery-ui-1.11.4.min.js"></script>
+	<script type="text/javascript" src="/mani30/js/common.js"></script>
+	<meta http-equiv="Refresh" content="1800;URL=http://localhost:8012/mani30/my_view_page.php?refresh=true" />
+</head>
+<body>
+<div id="mantis">
+<div id="banner"><a id="logo-link" href="my_view_page.php"><img id="logo-image" alt="MantisBT" src="/mani30/images/mantis_logo.png" /></a></div><div class="info-bar">
+<div id="login-info">
+	<span id="logged-in-label">Logged in as</span>
+	<span id="logged-in-user">administrator</span>
+	<span id="logged-in">	<span id="logged-in-realname">Admin_waleed</span>
+	<span id="logged-in-accesslevel" class="administrator">administrator</span>
+	</span>
+</div>
+<div id="rss-feed">
+	<a href="http://localhost:8012/mani30/issues_rss.php?username=administrator&amp;key=7EiQUjD_8LGt_UFf-BiVjuLA4pZDpTSd7wMKpMaLGIqCm6dgGSRMUsjKueiQWEGEc0DA-N2EETxAyX05RbUQ">
+	<img src="/mani30/images/rss.png" alt="RSS" title="RSS" />
+	</a>
+</div>
+<div id="project-selector-div"><form method="post" id="form-set-project" action="/mani30/set_project.php"><fieldset id="project-selector"><label for="form-set-project-id">Project</label><select id="form-set-project-id" name="project_id"><option value="0" selected="selected">All Projects</option>
+</select> <input type="submit" class="button" value="Switch" /></fieldset></form></div><div id="current-time">2016-11-18 16:46 CET</div></div>
+
+<div class="main-menu">
+<ul id="menu-items">
+	<li><a href="/mani30/my_view_page.php">My View</a></li>
+	<li><a href="/mani30/view_all_bug_page.php">View Issues</a></li>
+	<li><a href="/mani30/bug_report_page.php">Report Issue</a></li>
+	<li><a href="/mani30/changelog_page.php">Change Log</a></li>
+	<li><a href="/mani30/roadmap_page.php">Roadmap</a></li>
+	<li><a href="/mani30/summary_page.php">Summary</a></li>
+	<li><a class="manage-menu-link" href="/mani30/manage_overview_page.php">Manage</a></li>
+	<li><a class="account-menu-link" href="/mani30/account_page.php">My Account</a></li>
+	<li><a id="logout-link" href="/mani30/logout_page.php">Logout</a></li>
+</ul>
+<div id="bug-jump" ><form method="post" class="bug-jump-form" action="/mani30/jump_to_bug.php"><fieldset class="bug-jump"><input type="hidden" name="bug_label" value="Issue #" /><input type="text" name="bug_id" size="8" />&#160;<input type="submit" value="Jump" />&#160;</fieldset></form></div>
+</div>
+<div id="content">
+
+<div>
+
+<div>
+<div class="timeline"><div class="heading">Timeline</div><div class="date-range">2016-11-11 .. 2016-11-18 [<a href="my_view_page.php?days=7">Prev</a>]</div><p>No activity within time range.</p></div>
+<div class="myview_boxes_area">
+
+<table class="hide" cellspacing="3" cellpadding="0">
+<tr><td class="myview-left-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;handler_id=1&amp;hide_status=80">Assigned to Me (Unresolved)</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr><tr><td class="myview-right-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[none]&amp;hide_status=90">Unassigned</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr><tr><td class="myview-left-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;reporter_id=1&amp;hide_status=90">Reported by Me</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr><tr><td class="myview-right-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;status=80&amp;hide_status=80">Resolved</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr><tr><td class="myview-left-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;hide_status=none">Recently Modified</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr><tr><td class="myview-right-col">
+<table class="width100 my-buglist" cellspacing="1">
+<thead>
+	<tr class="my-buglist-nav">
+	<td class="form-title" colspan="2">
+<a class="subtle" href="view_all_set.php?type=1&amp;temporary=y&amp;monitor_user_id=1&amp;hide_status=90">Monitored by Me</a> <span class="my-buglist-count">(0 - 0 / 0)</span>	</td>
+</tr>
+</thead>
+<tbody>
+<tr><td>&#160;</td></tr></tbody>
+</table>
+</td></tr>
+</table>
+</div>
+
+<br /><table class="status-legend width100" cellspacing="1"><tr><td class="small-caption status-legend-width status-10-color">new</td><td class="small-caption status-legend-width status-20-color">feedback</td><td class="small-caption status-legend-width status-30-color">acknowledged</td><td class="small-caption status-legend-width status-40-color">confirmed</td><td class="small-caption status-legend-width status-50-color">assigned</td><td class="small-caption status-legend-width status-80-color">resolved</td><td class="small-caption status-legend-width status-90-color">closed</td></tr></table></div>
+<div id="footer">
+<hr />
+	<div id="powered-by-mantisbt-logo">
+		<a href="http://www.mantisbt.org"
+			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
+			<img src="/mani30/images/mantis_logo.png" width="102" height="35"
+				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
+			</a>
+	</div>
+<address id="mantisbt-copyright">
+<address id="version">Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT </a></address>
+Copyright &copy; 2000 - 2016 MantisBT Team</address>
+	<address id="webmaster-contact-information">Contact <a href="mailto:webmaster@example.com" title="Contact the webmaster via e-mail.">administrator</a> for assistance</address>
+</div>
+</div>
+</body>
+</html>

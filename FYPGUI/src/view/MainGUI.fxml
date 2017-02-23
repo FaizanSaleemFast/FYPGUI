@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox id="pane" alignment="BASELINE_CENTER" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainGUIController">
+   <children>
+      <AnchorPane prefHeight="647.0">
+         <children>
+            <ScrollPane id="oldVersion" fx:id="newVersionLines" hbarPolicy="NEVER" layoutX="525.0" layoutY="91.0" prefHeight="316.0" prefWidth="36.0" vbarPolicy="NEVER" />
+            <ScrollPane id="oldVersion" fx:id="oldVersionLines" hbarPolicy="NEVER" layoutX="66.0" layoutY="91.0" prefHeight="316.0" prefWidth="36.0" vbarPolicy="NEVER" />
+            <ImageView fitHeight="42.0" fitWidth="820.0" focusTraversable="true" layoutX="146.0" layoutY="28.0" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="28.0">
+               <image>
+                  <Image url="@project_name.png" />
+               </image>
+            </ImageView>
+            <ScrollPane id="oldVersion" fx:id="oldVersion" hbarPolicy="ALWAYS" layoutX="86.0" layoutY="91.0" prefHeight="316.0" prefWidth="431.0" vbarPolicy="ALWAYS" />
+            <ScrollPane fx:id="newVersion" hbarPolicy="ALWAYS" layoutX="545.0" layoutY="91.0" prefHeight="316.0" prefWidth="431.0" vbarPolicy="ALWAYS" />
+            <Button fx:id="findDifferences" layoutX="70.0" layoutY="531.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" text="Find Differences" />
+            <ListView fx:id="differenceCategories" layoutX="226.0" layoutY="479.0" prefHeight="145.0" prefWidth="750.0" />
+            <Label layoutX="6.5" layoutY="251.5" rotate="-90.0" text="Version 1" textOverrun="CLIP">
+               <font>
+                  <Font name="Arial Narrow Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="950.5" layoutY="250.5" rotate="-90.0" text="Version 2" textOverrun="CLIP">
+               <font>
+                  <Font name="Arial Narrow Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="72.0" fitWidth="73.0" layoutX="63.0" layoutY="8.0">
+               <image>
+                  <Image url="@repair_icon.png" />
+               </image>
+            </ImageView>
+            <Button id="btn" fx:id="selectV2" contentDisplay="CENTER" layoutX="561.0" layoutY="417.0" maxHeight="25.0" maxWidth="23.0" minHeight="19.0" minWidth="23.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="23.0" stylesheets="@style.css" />
+            <ToggleButton fx:id="version1WebView" layoutX="390.0" layoutY="414.0" mnemonicParsing="false" text="Web">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ToggleButton>
+            <ToggleButton fx:id="version1HTMLView" layoutX="442.0" layoutY="414.0" mnemonicParsing="false" text="HTML">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ToggleButton>
+            <ToggleButton fx:id="version2WebView" layoutX="858.0" layoutY="414.0" mnemonicParsing="false" text="Web">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton fx:id="version2HTMLView" layoutX="908.0" layoutY="414.0" mnemonicParsing="false" text="HTML">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <TextField fx:id="urlVersion1" layoutX="120.0" layoutY="414.0" prefHeight="25.0" prefWidth="245.0" promptText="Enter Url" />
+            <TextField fx:id="urlVersion2" layoutX="591.0" layoutY="414.0" prefHeight="25.0" prefWidth="253.0" promptText="Enter Url" />
+            <Button id="btn" fx:id="selectV1" contentDisplay="CENTER" layoutX="89.0" layoutY="416.0" maxHeight="25.0" maxWidth="23.0" minHeight="19.0" minWidth="23.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="23.0" stylesheets="@style.css" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

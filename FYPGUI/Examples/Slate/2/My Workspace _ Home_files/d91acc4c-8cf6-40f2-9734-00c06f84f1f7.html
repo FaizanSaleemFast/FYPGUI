@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0082)http://slate.nu.edu.pk/portal/tool/d91acc4c-8cf6-40f2-9734-00c06f84f1f7?panel=Main -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <title>My Workspace Information Display</title>
+    <link href="./tool_base.css" type="text/css" rel="stylesheet" media="all">
+<link href="./tool.css" type="text/css" rel="stylesheet" media="all">
+<script type="text/javascript" language="JavaScript" src="./headscripts.js.download"></script>
+<script type="text/javascript" language="JavaScript">var sakai = sakai || {}; sakai.editor = sakai.editor || {}; 
+sakai.editor.collectionId = '/user/i130143/';
+sakai.editor.enableResourceSearch = false;</script>
+<script type="text/javascript" language="JavaScript"></script>
+<script type="text/javascript" language="JavaScript" src="./fckeditor.js.download"></script>
+<script type="text/javascript" language="JavaScript" src="./fckeditor.launch.js.download"></script>
+	
+    
+    	            
+    
+  </head>
+  <body onload="setMainFrameHeight(&#39;Maind91acc4cx8cf6x40f2x9734x00c06f84f1f7&#39;);setFocus(focus_path);" marginwidth="0" marginheight="0">
+<div class="portletBody">
+	<ul class="navIntraTool actionToolBar" role="menu">
+		<li class="firstToolBarItem" role="menuitem"><span><a href="http://slate.nu.edu.pk/portal/tool/d91acc4c-8cf6-40f2-9734-00c06f84f1f7?panel=Main#" title="My Workspace Information Display Options" onclick="location = &#39;http://slate.nu.edu.pk/portal/tool/d91acc4c-8cf6-40f2-9734-00c06f84f1f7?panel=Main&amp;sakai_action=doOptions&#39;;return false;">
+		Options </a></span></li>
+	</ul>
+
+
+		 	<div class="wcwmenu"> 		<iframe title="My Workspace Information Message" width="100%" id="wciframe" name="wciframe" style="width:100%;padding:0 !important; height:600px" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" src="./myworkspace_info.html" onload="updateMainFrameHeight();">
+		</iframe>
+	</div>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+
+	function updateMainFrameHeight()
+	{
+		var iframeUrl = "/library/content/myworkspace_info.html";
+		//checking for different domain so that resize does not fire (results in error when domain is different from iframe domain). 
+		if (iframeUrl.indexOf(document.domain) !==-1)
+		{
+			var frame = parent.document.getElementById(window.name);
+			if (frame)
+			{
+				// reset the scroll
+				parent.window.scrollTo(0,0);
+				
+				// Mozilla way to detect height
+				var height = document.body.offsetHeight;
+				
+				// Internet Explorer way to detect height
+				if (document.body.scrollHeight)
+				{
+					height = document.body.scrollHeight;
+				}
+	
+				var innerIframe = document.getElementById("wciframe");
+				var innerIframeName = innerIframe.name;
+				var iHeight = 0;
+				// Internet Explorer way to detect height
+				if (innerIframe.contentWindow.document.body.scrollHeight)
+				{
+					iHeight = innerIframe.contentWindow.document.body.scrollHeight;
+				}
+				document.getElementById(innerIframeName).style.height=iHeight + "px";
+				height += iHeight;
+				if (frame) 
+				{
+					frame.height = height;
+				}
+			}	
+		}
+		
+	}
+</script>
+</body></html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0090)http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./tool_base.css" type="text/css" rel="stylesheet" media="all">
+<link href="./tool.css" type="text/css" rel="stylesheet" media="all">
+<script type="text/javascript" language="JavaScript" src="./headscripts.js.download"></script>
+<script type="text/javascript" language="JavaScript">var sakai = sakai || {}; sakai.editor = sakai.editor || {}; 
+sakai.editor.collectionId = '/user/i130143/';
+sakai.editor.enableResourceSearch = false;</script>
+<script type="text/javascript" language="JavaScript"></script>
+<script type="text/javascript" language="JavaScript" src="./fckeditor.js.download"></script>
+<script type="text/javascript" language="JavaScript" src="./fckeditor.launch.js.download"></script>
+</head>
+<body onload="setMainFrameHeight(&#39;Main5f863d72xa3e9x42d7xa1e2x8c25f1760206&#39;);setFocus(focus_path);" marginwidth="0" marginheight="0">
+<div class="portletBody">
+
+<script type="text/javascript" src="./jquery.js.download"></script>
+<script src="./jquery.tablesorter.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+
+//this function (setupTableParsers) setting has to be in the jsp page b/c of the msgs.syn_no_messages string.
+var SynMainLite = SynMainLite || {};
+var messagesDisabled = false;
+var forumsDisabled = false;
+
+SynMainLite.setupTableHeaders = function (){
+	try{
+	//since f:facet only allows one tag (no nested tags either) this will set up the hyperlink (only used to
+	//make the user realize they can click the headers for sorting) to have the correct text from the msgs variable
+	$("#hideHeader")[0].innerHTML = "Don't Show";
+	$("#siteHeader")[0].innerHTML = 'Site';
+	if(!messagesDisabled){
+		$("#messagesHeader")[0].innerHTML = 'New Messages';
+	}
+	if(!forumsDisabled){
+		$("#forumsHeader")[0].innerHTML = 'New in Forums';
+	}
+	$("#showOptions")[0].innerHTML = 'Options';
+	}catch(e){
+	}
+};
+
+
+SynMainLite.setupTableParsers = function (){
+
+	 //add message count orderer
+	 $.tablesorter.addParser({
+	        id: 'newMessageCount',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            //this is used to parse out the number of messages from the html, or 
+	            //convert 'none' to the number 0, so we can order numberically
+	            return s.toLowerCase().replace('none',0).replace(new RegExp('</a>$'), '').replace(new RegExp('<a.*>'),'').replace(new RegExp('<img.*>'),'');           
+	        },
+	        type: "numeric"
+	    });  
+	 //add title sorter
+	    $.tablesorter.addParser({
+	        id: 'title',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            //this is used to parse out the number of messages from the html, or 
+	            //convert 'none' to the number 0, so we can order numberically
+	            return s.toLowerCase().replace(new RegExp('</a>$'), '').replace(new RegExp('<a.*>'),'');           
+	        },
+	        type: "text"
+	    });
+	    
+	    //add checkbox sorter
+	    $.tablesorter.addParser({
+	        id: 'checkbox',
+	        is: function(s) {
+	            return false;
+	        },
+	        format: function(s) {
+	            var integer = 0;
+	            if (s.toLowerCase().match(/<input[^>]*checked*/i)) {
+	                integer = 1;
+	            }
+	            return integer;
+	        },
+	        type: "numeric"
+	    }); 
+	    
+	    //apply orderers to workspaceTable
+	    
+	    if(!messagesDisabled && !forumsDisabled){
+		    $(".workspaceTable").tablesorter({ 
+			    
+		        headers: {
+		    	0: { 
+		    	    sorter:'checkbox' 
+		    	},
+		    	1: { 
+		 	       sorter:'title' 
+		    	}, 
+		    	2: { 
+			        sorter:'newMessageCount' 
+			    }, 
+		        3: { 
+		            sorter:'newMessageCount' 
+		        } 
+		        } 
+		    });
+	    }else if(messagesDisabled && forumsDisabled){
+	    	 $(".workspaceTable").tablesorter({ 
+				    
+			        headers: {
+			    	0: { 
+			    	    sorter:'checkbox' 
+			    	},
+			    	1: { 
+			 	       sorter:'title' 
+			    	} 
+			        } 
+			    });
+	    }else{
+	    	 $(".workspaceTable").tablesorter({ 
+				    
+			        headers: {
+			    	0: { 
+			    	    sorter:'checkbox' 
+			    	},
+			    	1: { 
+			 	       sorter:'title' 
+			    	}, 
+			    	2: { 
+				        sorter:'newMessageCount' 
+				    }
+			        } 
+			    });
+	    }
+	};
+
+
+
+
+
+
+
+	function resize(){
+		mySetMainFrameHeightViewCell('Main5f863d72xa3e9x42d7xa1e2x8c25f1760206');
+	}
+	
+	
+function mySetMainFrameHeightViewCell(id)
+{
+	// run the script only if this window's name matches the id parameter
+	// this tells us that the iframe in parent by the name of 'id' is the one who spawned us
+	if (typeof window.name != "undefined" && id != window.name) return;
+
+	var frame = parent.document.getElementById(id);
+	if (frame)
+	{
+
+		var objToResize = (frame.style) ? frame.style : frame;
+  
+    // SAK-11014 revert           if ( false ) {
+
+		var height; 		
+		var offsetH = document.body.offsetHeight;
+		var innerDocScrollH = null;
+
+		if (typeof(frame.contentDocument) != 'undefined' || typeof(frame.contentWindow) != 'undefined')
+		{
+			// very special way to get the height from IE on Windows!
+			// note that the above special way of testing for undefined variables is necessary for older browsers
+			// (IE 5.5 Mac) to not choke on the undefined variables.
+ 			var innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
+			innerDocScrollH = (innerDoc != null) ? innerDoc.body.scrollHeight : null;
+		}
+	
+		if (document.all && innerDocScrollH != null)
+		{
+			// IE on Windows only
+			height = innerDocScrollH;
+		}
+		else
+		{
+			// every other browser!
+			height = offsetH;
+		}
+   // SAK-11014 revert		} 
+
+   // SAK-11014 revert             var height = getFrameHeight(frame);
+
+		// here we fudge to get a little bigger
+		var newHeight = height + 40;
+
+		// but not too big!
+		if (newHeight > 32760) newHeight = 32760;
+
+		// capture my current scroll position
+		var scroll = findScroll();
+
+		// resize parent frame (this resets the scroll as well)
+		objToResize.height=newHeight + "px";
+
+		// reset the scroll, unless it was y=0)
+		if (scroll[1] > 0)
+		{
+			var position = findPosition(frame);
+			parent.window.scrollTo(position[0]+scroll[0], position[1]+scroll[1]);
+		}
+	}
+}
+</script>
+<script src="./synopticLite.js.download" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./TableSorter.css">
+
+	<form id="synopticForm" method="post" action="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite" enctype="application/x-www-form-urlencoded">
+
+		
+		
+		
+		
+			
+			
+							
+								  	
+		 		<ul class="navIntraTool actionToolbar" role="menu"><li role="menuitem" class="firstToolBarItem"><span><a id="showOptions" name="showOptions" class="optionLink" href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="$(&#39;.optionsTable&#39;).fadeIn(resize);$(&#39;.optionLink&#39;).toggle();$(&#39;.workspaceTable&#39;).fadeIn();$(&#39;.noActivity&#39;).fadeOut();$(&#39;.hideInfo&#39;).fadeIn();">Options</a></span></li> </ul>
+	
+				
+		  	
+		  	
+		  	
+			
+		  	<div class="hideInfo" style="display: none;"> 
+				<span class="information">Remove sites from this synoptic list.</span><span class="highlight">Sites that are hidden from Preferences will not show up in this list.</span>
+		  	</div>
+	  		
+		 		
+	 
+	 
+	 			
+	       			
+	       				
+	       							 		
+					
+					
+					
+						
+							
+						
+					
+				
+	 
+	 
+	       		
+					
+						
+						
+					
+				
+				
+								
+		   		
+	
+				
+					
+						
+						 					
+	 				
+	
+							
+							
+			 				
+							
+													
+							
+							
+							
+							
+		
+				 			
+			
+						
+						
+					
+				
+				
+	
+				
+					
+						
+						 					
+	 							
+						
+						
+										
+							
+							
+				 			
+						
+					
+				
+	
+				
+					
+						
+											
+	 				
+	 				
+					 				
+						
+						
+						
+						
+						
+						
+						
+						
+	
+						
+						
+				
+						
+					
+				
+				
+					
+						
+											
+	 				
+					
+									
+						
+						
+			 			
+					
+				
+				
+	
+		 	<table id="synopticForm:myWorkspaceUnread:myWorkspaceTable" class="listHier lines nolines tablesorter workspaceTable" cellpadding="0" cellspacing="0" style="margin-left:2em;width:75%;">
+<thead>
+<tr>
+<th scope="col" class="header optionsTable" style="background-position: 71px center; display: none;"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1" id="hideHeader" onclick="return false;">Don't Show</a></th>
+<th scope="col" class="header" style="background-position: 30px center;"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1" id="siteHeader" onclick="return false;">Site</a></th>
+<th scope="col" class="header" style="background-position: 88px center;"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1" id="messagesHeader" onclick="return false;">New Messages</a></th>
+<th scope="col" class="header" style="background-position: 94px center;"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1" id="forumsHeader" onclick="return false;">New in Forums</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:0:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/29162eef-0edf-4fd6-bd0e-a5c6bc499d87&#39;;">FIRS</a></span></td>
+<td class="rightAlignColumn">none</td>
+<td class="rightAlignColumn">none</td>
+</tr>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:1:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/ISBCS401FALL2016CS&#39;;">Artificial Intelligence CS 2016-03 ISB</a></span></td>
+<td class="rightAlignColumn"><span title="Go to messages"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS401FALL2016CS710/sakai.messageforums.helper.helper/privateMsg/pvtMsg?pvtMsgTopicId=71cd3db5-807c-4699-945d-1ff9f97cf355&amp;contextId=ISBCS401FALL2016CS&amp;selectedTopic=pvt_received&#39;;">none</a></span></td>
+<td class="rightAlignColumn"><span title="Go to forums"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS401FALL2016CS410/sakai.messageforums.helper.helper/discussionForum/forumsOnly/dfForums&#39;;">none</a></span></td>
+</tr>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:2:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/ISBCS408FALL2016CS&#39;;">Data Warehousing CS 2016-03 ISB</a></span></td>
+<td class="rightAlignColumn"><span title="Go to messages"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS408FALL2016CS710/sakai.messageforums.helper.helper/privateMsg/pvtMsg?pvtMsgTopicId=d90c0be7-1f9b-40b4-b6ef-63a1abb73cad&amp;contextId=ISBCS408FALL2016CS&amp;selectedTopic=pvt_received&#39;;">2</a></span>  <img src="./email.png" alt=""></td>
+<td class="rightAlignColumn"><span title="Go to forums"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS408FALL2016CS410/sakai.messageforums.helper.helper/discussionForum/forumsOnly/dfForums&#39;;">none</a></span></td>
+</tr>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:3:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/ISBCS422FALL2016CS&#39;;">Human Computer Interaction CS 2016-03 ISB</a></span></td>
+<td class="rightAlignColumn"><span title="Go to messages"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS422FALL2016CS710/sakai.messageforums.helper.helper/privateMsg/pvtMsg?pvtMsgTopicId=9d6f0300-bbb1-47d3-ba33-38aabea9ac3e&amp;contextId=ISBCS422FALL2016CS&amp;selectedTopic=pvt_received&#39;;">none</a></span></td>
+<td class="rightAlignColumn"><span title="Go to forums"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS422FALL2016CS410/sakai.messageforums.helper.helper/discussionForum/forumsOnly/dfForums&#39;;">3</a></span>  <img src="./email.png" alt=""></td>
+</tr>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:4:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/ISBCS491FALL2016CS&#39;;">Project - I CS 2016-03 ISB</a></span></td>
+<td class="rightAlignColumn"><span title="Go to messages"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS491FALL2016CS710/sakai.messageforums.helper.helper/privateMsg/pvtMsg?pvtMsgTopicId=d2be7249-bcdb-46fc-942e-c799e12f7361&amp;contextId=ISBCS491FALL2016CS&amp;selectedTopic=pvt_received&#39;;">none</a></span></td>
+<td class="rightAlignColumn"><span title="Go to forums"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBCS491FALL2016CS410/sakai.messageforums.helper.helper/discussionForum/forumsOnly/dfForums&#39;;">none</a></span></td>
+</tr>
+<tr>
+<td class="optionsTable" style="display: none;"><input type="checkbox" name="synopticForm:myWorkspaceUnread:myWorkspaceTable:5:_id19"><input type="checkbox" class="unchangedValue" style="display: none;"></td>
+<td class=""><span title="Go to site"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/site/ISBMG205FALL2016CS&#39;;">Entrepreneurship CS 2016-03 ISB</a></span></td>
+<td class="rightAlignColumn"><span title="Go to messages"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBMG205FALL2016CS710/sakai.messageforums.helper.helper/privateMsg/pvtMsg?pvtMsgTopicId=5dd0ff9f-8531-42f5-80f6-20415ae81bc4&amp;contextId=ISBMG205FALL2016CS&amp;selectedTopic=pvt_received&#39;;">15</a></span>  <img src="./email.png" alt=""></td>
+<td class="rightAlignColumn"><span title="Go to forums"><a href="http://slate.nu.edu.pk/portal/tool/5f863d72-a3e9-42d7-a1e2-8c25f1760206/synMainLite?time=1#" onclick="javascript:window.parent.location.href=&#39;http://slate.nu.edu.pk/portal/directtool/ISBMG205FALL2016CS410/sakai.messageforums.helper.helper/discussionForum/forumsOnly/dfForums&#39;;">none</a></span></td>
+</tr>
+</tbody>
+</table>
+
+	 		<div class="optionsTable" style="display: none;"> 			
+	 			<br>
+	 			<br>
+	 		<input id="synopticForm:myWorkspaceUnread:update" type="submit" name="synopticForm:myWorkspaceUnread:update" value="Update">	 		
+	 		<input type="button" id="cancel" value="Cancel" onclick="$(&#39;.optionsTable&#39;).fadeOut(resize);$(&#39;.optionLink&#39;).toggle();SynMainLite.resetCheckboxes();$(&#39;.hideInfo&#39;).fadeOut();if(SynMainLite.getCount() == 1){$(&#39;.noActivity&#39;).fadeIn();$(&#39;.workspaceTable&#39;).fadeOut();};"> 		
+	 		</div>
+		
+			
+				
+				  
+			
+		
+	
+		
+	  
+	  <!-- Site Home Page -->
+	 
+		
+		
+			
+		
+		
+			
+
+			
+				
+				
+
+				
+
+		 		
+
+			
+			
+		
+			
+		
+		
+		
+			
+		
+
+		
+			
+			
+			
+			
+			
+
+			
+					
+
+		
+	
+	
+	  	
+	
+
+    <input type="hidden" name="synopticForm" value="synopticForm"></form> 
+    
+	<script type="text/javascript">
+		//Put this code in the jsp page since IE8 was having trouble with $(document).ready() function.
+		SynMainLite.setupTableParsers();
+		SynMainLite.setupTableHeaders();
+		SynMainLite.setupTableSortImageOffset();
+		//hide all checkboxes that are used to reset original values
+		$(".unchangedValue").hide();
+		SynMainLite.toggleHiddenRows();
+	</script>
+  </div>
+  
+ 
+ 
+</body></html>
