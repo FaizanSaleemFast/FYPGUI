@@ -10,6 +10,9 @@ public class TestCaseMain {
 	
 	public static void main(String[] args) {
 		
+		
+		System.out.println("Just To Test Git");
+		
 		File file = new File("testcase1.txt");
 		PageParser pp =  new PageParser("before.html", "after.html");
 		pp.setup();		
