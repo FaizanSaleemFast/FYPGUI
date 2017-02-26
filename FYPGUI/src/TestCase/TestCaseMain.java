@@ -14,7 +14,6 @@ public class TestCaseMain {
 		System.out.println("Just To Test Git");
 		System.out.println("Just To Test Git 2");
 		System.out.println("Just To Test Git Waleed");
-		System.out.println("Just To Test Git Waleed");
 
 		
 		File file = new File("testcase1.txt");
